@@ -1,0 +1,201 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f4f5f7;
+  color: #1f2937;
+}
+
+.topo {
+  background: #111827;
+  color: #fff;
+  padding: 16px;
+}
+
+.topo h1 {
+  margin: 0 0 10px 0;
+  font-size: 1.3rem;
+}
+
+.menu a {
+  color: #e5e7eb;
+  text-decoration: none;
+  margin-right: 16px;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 720px;
+  margin: 20px auto;
+  padding: 0 14px;
+}
+
+.card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.form-treino label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.form-treino input,
+.form-treino select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+}
+
+.linha-dupla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn {
+  margin-top: 14px;
+  display: inline-block;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 11px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-secundario {
+  background: #374151;
+  margin-top: 0;
+}
+
+.alertas {
+  background: #dbeafe;
+  color: #1e3a8a;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+}
+
+.lista-registros {
+  padding-left: 18px;
+}
+
+.texto-apoio {
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+.acoes-backup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.form-importar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.tabela-wrapper {
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+.tabela th,
+.tabela td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.92rem;
+}
+
+.filtros-dias {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  color: #111827;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.88rem;
+}
+
+.chip.ativo {
+  background: #2563eb;
+  color: #fff;
+}
+
+.destaques-musculos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.destaque-box {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.barra-item {
+  margin-bottom: 14px;
+}
+
+.barra-topo {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 0.92rem;
+}
+
+.barra-trilha {
+  width: 100%;
+  height: 12px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.barra-preenchida {
+  height: 100%;
+  background: #2563eb;
+  border-radius: 999px;
+}
+.btn-perigo {
+  background: #dc2626;
+  padding: 6px 10px;
+  margin-top: 0;
+  margin-left: 6px;
+  font-size: 0.85rem;
+}

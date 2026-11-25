@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Histórico - Treino App{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Backup e Restauração</h2>
+  <p class="texto-apoio">
+    Exporte o seu histórico em JSON para guardar no computador, na nuvem ou transferir para outro dispositivo sem perder dados.
+  </p>
+  <div class="acoes-backup">
+    <a href="{{ url_for('exportar_backup') }}" class="btn">Baixar backup JSON</a>
+    <form method="POST" enctype="multipart/form-data" class="form-importar">
+      <input type="file" name="arquivo_backup" accept=".json" required />
+      <button type="submit" class="btn btn-secundario">Importar backup</button>
+    </form>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Progressão por exercício</h2>
+  {% if progressao %}
+    <div class="tabela-wrapper">
+      <table class="tabela">
+        <thead>
+          <tr>
+            <th>Exercício</th>
+            <th>Recorde</th>
+            <th>Séries</th>
+            <th>Total reps</th>
+            <th>Último treino</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in progressao %}
+            <tr>
+              <td><strong>{{ p.exercicio_nome }}</strong></td>
+              <td>{{ p.recorde_repeticoes }} reps</td>
+              <td>{{ p.total_series }}</td>
+              <td>{{ p.total_repeticoes }}</td>
+              <td>{{ p.ultimo_treino or "—" }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>Nenhum exercício registado ainda.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h2>Histórico detalhado de séries</h2>
+  {% if registros %}
+    <div class="tabela-wrapper">
+      <table class="tabela">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Exercício</th>
+            <th>Série</th>
+            <th>Reps</th>
+            <th>Obs.</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in registros %}
+            <tr>
+              <td>{{ r.data_treino }}</td>
+              <td>{{ r.exercicio_nome }}</td>
+              <td>{{ r.serie }}ª</td>
+              <td><strong>{{ r.repeticoes }}</strong></td>
+              <td>{{ r.observacao or "—" }}</td>
+              <td>
+                <a href="{{ url_for('editar_registro', registro_id=r.id) }}">Editar</a>
+                <form
+                  method="POST"
+                  action="{{ url_for('remover_registro', registro_id=r.id) }}"
+                  style="display:inline;"
+                  onsubmit="return confirm('Excluir este registo?');"
+                >
+                  <button type="submit" class="btn btn-perigo">Excluir</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>Nenhuma série registada até ao momento.</p>
+  {% endif %}
+</section>
+{% endblock %}

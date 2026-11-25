@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Registrar Série - Treino App{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Resumo (últimos {{ resumo_7d.dias }} dias)</h2>
+  <p>
+    <strong>Dias treinados:</strong> {{ resumo_7d.dias_treinados }} |
+    <strong>Séries:</strong> {{ resumo_7d.total_series }} |
+    <strong>Repetições:</strong> {{ resumo_7d.total_repeticoes }}
+  </p>
+</section>
+
+<section class="card">
+  <h2>Registrar série</h2>
+  <form method="POST" class="form-treino">
+    <label for="data_treino">Data</label>
+    <input type="date" id="data_treino" name="data_treino" value="{{ hoje }}" required />
+
+    <label for="exercicio_id">Exercício</label>
+    <select id="exercicio_id" name="exercicio_id" required>
+      {% for ex in exercicios %}
+        <option value="{{ ex.id }}">{{ ex.nome }} ({{ ex.equipamento }})</option>
+      {% endfor %}
+    </select>
+
+    <div class="linha-dupla">
+      <div>
+        <label for="serie">Série nº</label>
+        <input type="number" id="serie" name="serie" min="1" value="1" required />
+      </div>
+      <div>
+        <label for="repeticoes">Repetições</label>
+        <input type="number" id="repeticoes" name="repeticoes" min="1" placeholder="Ex.: 10" required />
+      </div>
+    </div>
+
+    <label for="observacao">Observação (opcional)</label>
+    <input type="text" id="observacao" name="observacao" placeholder="Ex.: descida lenta de 3s" />
+
+    <button type="submit" class="btn">Salvar série</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Últimos registros</h2>
+  {% if registros_recentes %}
+    <ul class="lista-registros">
+      {% for r in registros_recentes %}
+        <li>
+          <strong>{{ r.data_treino }}</strong> — {{ r.exercicio_nome }}:
+          série {{ r.serie }} com <strong>{{ r.repeticoes }} reps</strong>
+          {% if r.observacao %}<em>({{ r.observacao }})</em>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Nenhuma série registrada ainda.</p>
+  {% endif %}
+</section>
+{% endblock %}

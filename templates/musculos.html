@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Músculos - Treino App{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Volume por grupo muscular</h2>
+  <div class="filtros-dias">
+    <a href="{{ url_for('musculos', dias=7) }}" class="chip {% if dias == 7 %}ativo{% endif %}">7 dias</a>
+    <a href="{{ url_for('musculos', dias=14) }}" class="chip {% if dias == 14 %}ativo{% endif %}">14 dias</a>
+    <a href="{{ url_for('musculos', dias=30) }}" class="chip {% if dias == 30 %}ativo{% endif %}">30 dias</a>
+  </div>
+
+  <p class="texto-apoio">
+    <strong>Dias treinados:</strong> {{ resumo.dias_treinados }} |
+    <strong>Séries:</strong> {{ resumo.total_series }} |
+    <strong>Repetições:</strong> {{ resumo.total_repeticoes }}
+  </p>
+
+  {% if resumo.mais_trabalhado or resumo.menos_trabalhado %}
+    <div class="destaques-musculos">
+      {% if resumo.mais_trabalhado %}
+        <div class="destaque-box">
+          <span>Mais trabalhado ({{ dias }}d)</span>
+          <strong>{{ resumo.mais_trabalhado.grupo_muscular|capitalize }}</strong>
+          <small>{{ resumo.mais_trabalhado.volume }} pts</small>
+        </div>
+      {% endif %}
+      {% if resumo.menos_trabalhado %}
+        <div class="destaque-box">
+          <span>Menor volume ativo ({{ dias }}d)</span>
+          <strong>{{ resumo.menos_trabalhado.grupo_muscular|capitalize }}</strong>
+          <small>{{ resumo.menos_trabalhado.volume }} pts</small>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h2>Distribuição por músculo</h2>
+  {% for m in volumes %}
+    <div class="barra-item">
+      <div class="barra-topo">
+        <strong>{{ m.grupo_muscular|capitalize }}</strong>
+        <span>{{ m.volume }} pts ({{ m.percentual_relativo }}%)</span>
+      </div>
+      <div class="barra-trilha">
+        <div class="barra-preenchida" style="width: {{ m.percentual_relativo }}%;"></div>
+      </div>
+    </div>
+  {% endfor %}
+</section>
+{% endblock %}

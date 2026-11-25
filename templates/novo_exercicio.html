@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Novo Exercício - Treino App{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Cadastrar novo exercício</h2>
+  <p class="texto-apoio">
+    Use <strong>1.0</strong> para músculo principal e <strong>0.5</strong> (ou outro valor) para músculo secundário.
+  </p>
+  <form method="POST" class="form-treino">
+    <label for="nome">Nome do exercício</label>
+    <input type="text" id="nome" name="nome" placeholder="Ex.: Barra fixa com pausa" required />
+
+    <label for="equipamento">Equipamento / Local</label>
+    <select id="equipamento" name="equipamento">
+      <option value="barra_porta">Barra de porta</option>
+      <option value="colchonete">Colchonete / Chão</option>
+    </select>
+
+    <h3>Músculos trabalhados</h3>
+    <div class="linha-dupla">
+      {% for grupo in grupos_musculares %}
+        <div>
+          <label for="peso_{{ grupo }}">{{ grupo|capitalize }}</label>
+          <input type="number" step="0.1" min="0" max="2" id="peso_{{ grupo }}" name="peso_{{ grupo }}" value="0" />
+        </div>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="btn">Cadastrar exercício</button>
+  </form>
+</section>
+{% endblock %}
